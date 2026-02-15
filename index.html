@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivenna Ventures — AI Assistant Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e8920d;
+            --primary-dark: #c47a00;
+            --accent: #f5a623;
+            --dark: #0d1117;
+            --dark-card: #161b22;
+            --dark-border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --gradient: linear-gradient(135deg, #e8920d, #f5c563);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(232, 146, 13, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(232, 146, 13, 0.15);
+            border: 1px solid rgba(232, 146, 13, 0.3);
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            max-width: 700px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin-bottom: 2rem;
+        }
+
+        .channels-strip {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            opacity: 0.6;
+        }
+
+        .channels-strip span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Pricing Card */
+        .pricing-card {
+            background: var(--dark-card);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 520px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 0 50px rgba(232, 146, 13, 0.1);
+            position: relative;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-total {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .pricing-total-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .pricing-divider {
+            border: none;
+            border-top: 1px solid var(--dark-border);
+            margin: 1.5rem 0;
+        }
+
+        .breakdown-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-left h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .breakdown-left p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .breakdown-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        /* Includes */
+        .includes-section {
+            margin-top: 1.5rem;
+        }
+
+        .includes-section h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .include-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .include-icon {
+            color: #3fb950;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* CTA Button */
+        .btn-primary {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(232, 146, 13, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(232, 146, 13, 0.4);
+        }
+
+        /* Use Case Section */
+        .use-case {
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .use-case-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .use-case-badge {
+            display: inline-block;
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.25);
+            color: #3fb950;
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-header h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .use-case-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .scenario-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .scenario-card .sc-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scenario-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .scenario-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* No Data Needed */
+        .no-data-box {
+            background: rgba(63, 185, 80, 0.04);
+            border: 1px solid rgba(63, 185, 80, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .no-data-box h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #3fb950;
+        }
+
+        .data-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .data-col h5 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+        }
+
+        .data-col.no-access h5 {
+            color: var(--accent);
+        }
+
+        .data-col.works-with h5 {
+            color: #3fb950;
+        }
+
+        .data-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .data-col ul li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding: 0.25rem 0;
+        }
+
+        .data-col.no-access li::before {
+            content: '✕ ';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .data-col.works-with li::before {
+            content: '✓ ';
+            color: #3fb950;
+            font-weight: bold;
+        }
+
+        .self-hosted-note {
+            text-align: center;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .self-hosted-note strong {
+            color: var(--text);
+        }
+
+        @media (max-width: 600px) {
+            .scenario-grid { grid-template-columns: 1fr; }
+            .data-columns { grid-template-columns: 1fr; }
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .footer-text a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .pricing-card { padding: 1.5rem; }
+            .pricing-total { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-badge">🧚 Vivenna Ventures — AI That Works For You</div>
+    <h1>Your Personal <span>AI Assistant.</span><br>Set Up & Ready to Go.</h1>
+    <p>We deploy OpenClaw — a self-hosted AI assistant that works across all your messaging apps, remembers everything, and keeps your data private.</p>
+
+    <div class="channels-strip">
+        <span>💬 WhatsApp</span>
+        <span>✈️ Telegram</span>
+        <span>🎮 Discord</span>
+        <span>📱 Signal</span>
+        <span>💼 Slack</span>
+        <span>🍎 iMessage</span>
+    </div>
+
+    <div class="pricing-card">
+        <div class="pricing-header">
+            <div class="pricing-label">Complete Setup Package</div>
+            <div class="pricing-total">$1,500</div>
+            <div class="pricing-total-sub">One-time setup · Everything you need to get started</div>
+        </div>
+
+        <hr class="pricing-divider">
+
+        <div class="breakdown-title">Cost Breakdown</div>
+
+        <div class="breakdown-item">
+            <div class="breakdown-left">
+                <h4>🧠 AI Service Subscription</h4>
+                <p>Claude by Anthropic (other options available)</p>
+            </div>
+            <div class="breakdown-price">$200/yr</div>
+        </div>
+
+        <div class="breakdown-item">
+            <div class="breakdown-left">
+                <h4>🔒 Secure VPS Hosting</h4>
+                <p>Private server to host your AI assistant 24/7</p>
+            </div>
+            <div class="breakdown-price">$100/yr</div>
+        </div>
+
+        <div class="breakdown-item">
+            <div class="breakdown-left">
+                <h4>⚙️ Full Deployment & Configuration</h4>
+                <p>Installation, channel setup, persona, memory & security</p>
+            </div>
+            <div class="breakdown-price">Included</div>
+        </div>
+
+        <hr class="pricing-divider">
+
+        <div class="includes-section">
+            <h4>What's Included</h4>
+            <div class="include-item">
+                <span class="include-icon">✓</span>
+                <span>1–2 hour introduction & training course</span>
+            </div>
+            <div class="include-item">
+                <span class="include-icon">✓</span>
+                <span>5 hours of dedicated support</span>
+            </div>
+            <div class="include-item">
+                <span class="include-icon">✓</span>
+                <span>Multi-channel setup (WhatsApp, Telegram, Discord & more)</span>
+            </div>
+            <div class="include-item">
+                <span class="include-icon">✓</span>
+                <span>Custom persona & persistent memory configured</span>
+            </div>
+            <div class="include-item">
+                <span class="include-icon">✓</span>
+                <span>Your data stays on your server — always</span>
+            </div>
+        </div>
+
+        <a href="mailto:your@email.com" class="btn-primary">📩 Get Started</a>
+    </div>
+
+    <div class="footer-text">
+        <p>© 2026 Vivenna Ventures · Powered by <a href="https://docs.openclaw.ai">OpenClaw</a></p>
+    </div>
+</section>
+
+</body>
+</html>
